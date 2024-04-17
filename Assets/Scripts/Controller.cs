@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RTank.Movement;
 
 namespace RTank.Controls
 {
     [RequireComponent(typeof(Mover))]
     public class Controller : MonoBehaviour
     {
-        bool inAction;
         Mover mover;
 
         private void Awake()
@@ -17,18 +17,18 @@ namespace RTank.Controls
 
         private void Update()
         {
-            if (inAction) { return; }
+            ReadMoveInput();
+        }
 
-            Vector3 newPosition = Vector3.zero;
-            if (Input.GetButtonDown("Horizontal"))
+        private void ReadMoveInput()
+        {
+            if (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"))
             {
-                newPosition = Vector3.right * Input.GetAxisRaw("Horizontal");
-                StartCoroutine(mover.Move(newPosition));
-            }
-            else if (Input.GetButtonDown("Vertical"))
-            {
-                newPosition = Vector3.forward * Input.GetAxisRaw("Vertical");
-                StartCoroutine(mover.Move(newPosition));
+                bool pressedHorizontal = Input.GetButtonDown("Horizontal");
+                float axis = pressedHorizontal ? Input.GetAxisRaw("Horizontal") : Input.GetAxisRaw("Vertical");
+                Vector3 newPosition = pressedHorizontal ? Vector3.right : Vector3.forward;
+                newPosition *= axis;
+                StartCoroutine(mover.MoveAndRotate(newPosition));
             }
         }
     }
