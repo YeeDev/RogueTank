@@ -42,5 +42,11 @@ namespace RTank.Core
                 waitingForEnemies = totalEnemies;
             }
         }
+
+        public void RemoveEnemyFromGame()
+        {
+            totalEnemies--;
+            waitingForEnemies--;
+        }
     }
 }
