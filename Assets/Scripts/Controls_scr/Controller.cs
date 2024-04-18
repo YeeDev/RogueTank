@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using RTank.Movement;
 using RTank.Core;
+using RTank.Combat;
 
 namespace RTank.Controls
 {
@@ -23,18 +24,19 @@ namespace RTank.Controls
 
         private void Update()
         {
-            ReadMoveInput();
-            ReadShootInput();
+            ReadInput(Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"), "CallMovement");
+            ReadInput(Input.GetMouseButtonDown(0), "CallShoot");
+            ReadInput(Input.GetMouseButtonDown(1), "CallReload");
         }
 
-        private void ReadMoveInput()
+        private void ReadInput(bool condition, string coroutineToRun)
         {
             if (turnOrganizer.TurnRunning) { return; }
 
-            if (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"))
+            if (condition)
             {
                 turnOrganizer.RunTurn();
-                StartCoroutine(CallMovement());
+                StartCoroutine(coroutineToRun);
             }
         }
 
@@ -57,20 +59,16 @@ namespace RTank.Controls
             return newPosition;
         }
 
-        private void ReadShootInput()
-        {
-            if (turnOrganizer.TurnRunning) { return; }
-
-            if (Input.GetMouseButtonDown(0))
-            {
-                turnOrganizer.RunTurn();
-                StartCoroutine(CallShoot());
-            }
-        }
-
         private IEnumerator CallShoot()
         {
             yield return shooter.Shoot();
+
+            turnOrganizer.EndTurn();
+        }
+
+        private IEnumerator CallReload()
+        {
+            yield return shooter.Reload();
 
             turnOrganizer.EndTurn();
         }
