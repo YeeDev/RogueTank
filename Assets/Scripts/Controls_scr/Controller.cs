@@ -6,14 +6,17 @@ using RTank.Core;
 namespace RTank.Controls
 {
     [RequireComponent(typeof(Mover))]
+    [RequireComponent(typeof(Shooter))]
     public class Controller : MonoBehaviour
     {
         Mover mover;
+        Shooter shooter;
         TurnOrganizer turnOrganizer;
 
         private void Awake()
         {
             mover = GetComponent<Mover>();
+            shooter = GetComponent<Shooter>();
 
             turnOrganizer = GameObject.FindGameObjectWithTag("TurnOrganizer").GetComponent<TurnOrganizer>();
         }
@@ -21,6 +24,7 @@ namespace RTank.Controls
         private void Update()
         {
             ReadMoveInput();
+            ReadShootInput();
         }
 
         private void ReadMoveInput()
@@ -51,6 +55,24 @@ namespace RTank.Controls
             newPosition *= axis;
 
             return newPosition;
+        }
+
+        private void ReadShootInput()
+        {
+            if (turnOrganizer.TurnRunning) { return; }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                turnOrganizer.RunTurn();
+                StartCoroutine(CallShoot());
+            }
+        }
+
+        private IEnumerator CallShoot()
+        {
+            yield return shooter.Shoot();
+
+            turnOrganizer.EndTurn();
         }
     }
 }
