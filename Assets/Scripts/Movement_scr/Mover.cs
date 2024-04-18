@@ -20,7 +20,7 @@ namespace RTank.Movement
             yield return Move(movePoint, direction);
         }
 
-        public IEnumerator Rotate(float angle, Vector3 direction)
+        private IEnumerator Rotate(float angle, Vector3 direction)
         {
             Quaternion lookAt = Quaternion.LookRotation(direction, transform.up);
 
@@ -38,7 +38,7 @@ namespace RTank.Movement
             }
         }
 
-        public IEnumerator Move(Vector3 movePoint, Vector3 direction)
+        private IEnumerator Move(Vector3 movePoint, Vector3 direction)
         {
             while (Vector3.SqrMagnitude(transform.position - movePoint) > 0.01f)
             {
