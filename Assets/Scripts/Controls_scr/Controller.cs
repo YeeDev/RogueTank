@@ -46,7 +46,7 @@ namespace RTank.Controls
 
             yield return StartCoroutine(mover.MoveAndRotate(newPosition));
 
-            turnOrganizer.EndTurn();
+            turnOrganizer.EndPlayerTurn();
         }
 
         private static Vector3 CalculateAxis()
@@ -63,14 +63,14 @@ namespace RTank.Controls
         {
             yield return shooter.Shoot();
 
-            turnOrganizer.EndTurn();
+            turnOrganizer.EndPlayerTurn();
         }
 
         private IEnumerator CallReload()
         {
             yield return shooter.Reload();
 
-            turnOrganizer.EndTurn();
+            turnOrganizer.EndPlayerTurn();
         }
     }
 }
