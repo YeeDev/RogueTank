@@ -24,27 +24,26 @@ namespace RTank.Controls
 
         private void Update()
         {
-            ReadInput(Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"), "CallMovement");
-            ReadInput(Input.GetMouseButtonDown(0), "CallShoot");
-            ReadInput(Input.GetMouseButtonDown(1), "CallReload");
+            ReadInput(Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"), mover.MoveAndRotate(CalculateAxis()));
+            ReadInput(Input.GetMouseButtonDown(0), shooter.Shoot());
+            ReadInput(Input.GetMouseButtonDown(1), shooter.Reload());
         }
 
-        private void ReadInput(bool condition, string coroutineToRun)
+
+        private void ReadInput(bool condition, IEnumerator action)
         {
             if (turnOrganizer.TurnRunning) { return; }
 
             if (condition)
             {
                 turnOrganizer.RunTurn();
-                StartCoroutine(coroutineToRun);
+                StartCoroutine(CallAction(action));
             }
         }
 
-        private IEnumerator CallMovement()
+        private IEnumerator CallAction(IEnumerator action)
         {
-            Vector3 newPosition = CalculateAxis();
-
-            yield return StartCoroutine(mover.MoveAndRotate(newPosition));
+            yield return StartCoroutine(action);
 
             turnOrganizer.EndPlayerTurn();
         }
@@ -57,20 +56,6 @@ namespace RTank.Controls
             newPosition *= axis;
 
             return newPosition;
-        }
-
-        private IEnumerator CallShoot()
-        {
-            yield return shooter.Shoot();
-
-            turnOrganizer.EndPlayerTurn();
-        }
-
-        private IEnumerator CallReload()
-        {
-            yield return shooter.Reload();
-
-            turnOrganizer.EndPlayerTurn();
         }
     }
 }
