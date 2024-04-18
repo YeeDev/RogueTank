@@ -1,15 +1,34 @@
 using System.Collections;
 using UnityEngine;
 
-public class Shooter : MonoBehaviour
+namespace RTank.Combat
 {
-    [SerializeField] Transform muzzle;
-    [SerializeField] GameObject shellPrefab;
-
-    public IEnumerator Shoot()
+    public class Shooter : MonoBehaviour
     {
-        GameObject shell = Instantiate(shellPrefab, muzzle.position, muzzle.rotation);
+        [SerializeField] Transform muzzle;
+        [SerializeField] GameObject shellPrefab;
 
-        yield return new WaitUntil(() => shell == null);
+        bool hasShell;
+
+        public IEnumerator Shoot()
+        {
+            if (!hasShell)
+            {
+                Debug.Log("No shell, cannot shoot. Lost turn.");
+                yield break;
+            }
+
+            hasShell = false;
+            GameObject shell = Instantiate(shellPrefab, muzzle.position, muzzle.rotation);
+
+            yield return new WaitUntil(() => shell == null);
+        }
+
+        public IEnumerator Reload()
+        {
+            hasShell = true;
+
+            yield return new WaitForSeconds(1); //Change to animation and sound time
+        }
     }
 }
