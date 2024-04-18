@@ -10,6 +10,8 @@ namespace RTank.Combat
 
         bool hasShell;
 
+        public bool HasShell => hasShell;
+
         public IEnumerator Shoot()
         {
             if (!hasShell)
