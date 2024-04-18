@@ -12,5 +12,10 @@ namespace RTank.Movement
         private void Awake() => rb = GetComponent<Rigidbody>();
 
         private void Start() => rb.velocity = transform.forward * speed * Time.fixedDeltaTime;
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.transform.CompareTag("Solid")) { Destroy(gameObject); }
+        }
     }
 }
