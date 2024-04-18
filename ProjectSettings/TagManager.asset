@@ -5,12 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - TurnOrganizer
-  - Solid
+  - Tank
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - 
