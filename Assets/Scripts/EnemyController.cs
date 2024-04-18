@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Yee.Math;
 using RTank.Core;
 using RTank.Movement;
 using RTank.Combat;
@@ -15,12 +16,15 @@ namespace RTank.Controls
 
         Mover mover;
         Shooter shooter;
+        Transform player;
         TurnOrganizer turnOrganizer;
 
         private void Awake()
         {
             mover = GetComponent<Mover>();
             shooter = GetComponent<Shooter>();
+
+            player = GameObject.FindGameObjectWithTag("Player").transform;
 
             turnOrganizer = GameObject.FindGameObjectWithTag("TurnOrganizer").GetComponent<TurnOrganizer>();
             turnOrganizer.AddEnemy();
@@ -49,12 +53,16 @@ namespace RTank.Controls
 
         private bool CheckIfPlayerInRange()
         {
-            return Physics.Raycast(transform.position + Vector3.forward, Vector3.forward, 1f, playerLayer);
+            bool inRange = Physics.CheckSphere(transform.position, checkerRadius, playerLayer);
+            bool canShoot = MathY.CheckEqualAxis(transform.position, player.position);
+
+            return inRange && canShoot;
         }
 
         private void OnDrawGizmos()
         {
-            
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, checkerRadius);
         }
     }
 }
