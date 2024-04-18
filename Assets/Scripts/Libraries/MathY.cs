@@ -48,5 +48,18 @@ namespace Yee.Math
             toFlat.y = t.y;
             return toFlat;
         }
+
+        public static Vector3 Flat2D(Vector3 v)
+        {
+            Vector3 flatted = v;
+            flatted.z = 0;
+            return flatted;
+        }
+
+        public static Vector3 Flat2D(Vector3 t, Vector3 toFlat)
+        {
+            toFlat.z = t.z;
+            return toFlat;
+        }
     }
 }
