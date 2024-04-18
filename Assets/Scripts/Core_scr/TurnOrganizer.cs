@@ -26,7 +26,7 @@ namespace RTank.Core
             if (OnPlayerEnd != null) { OnPlayerEnd(); }
             else
             {
-                //TODO change to actual logic when enemies get implemented
+                //TODO End level
                 turnRunning = false;
                 Debug.Log("Player wins");
             }
