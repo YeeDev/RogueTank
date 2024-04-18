@@ -27,7 +27,11 @@ namespace RTank.Controls
         }
 
         private void OnEnable() => turnOrganizer.OnPlayerEnd += TakeTurn;
-        private void OnDisable() => turnOrganizer.OnPlayerEnd -= TakeTurn;
+        private void OnDisable()
+        {
+            turnOrganizer.RemoveEnemyFromGame();
+            turnOrganizer.OnPlayerEnd -= TakeTurn;
+        }
 
         private void TakeTurn()
         {
