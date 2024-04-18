@@ -7,13 +7,21 @@ namespace RTank.Core
     {
         public Action OnPlayerEnd;
 
+        int totalEnemies;
+        int waitingForEnemies;
         bool turnRunning;
 
         public bool TurnRunning => turnRunning;
 
         public void RunTurn() => turnRunning = !turnRunning;
+        public void AddEnemy() => totalEnemies++;
 
-        public void EndTurn()
+        private void Start()
+        {
+            waitingForEnemies = totalEnemies;
+        }
+
+        public void EndPlayerTurn()
         {
             if (OnPlayerEnd != null) { OnPlayerEnd(); }
             else
@@ -21,6 +29,17 @@ namespace RTank.Core
                 //TODO change to actual logic when enemies get implemented
                 turnRunning = false;
                 Debug.Log("Player wins");
+            }
+        }
+
+        public void EndEnemyTurn()
+        {
+            waitingForEnemies--;
+
+            if (waitingForEnemies <= 0)
+            {
+                turnRunning = false;
+                waitingForEnemies = totalEnemies;
             }
         }
     }
