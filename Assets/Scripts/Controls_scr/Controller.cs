@@ -29,7 +29,6 @@ namespace RTank.Controls
             ReadInput(Input.GetMouseButtonDown(1), shooter.Reload());
         }
 
-
         private void ReadInput(bool condition, IEnumerator action)
         {
             if (turnOrganizer.TurnRunning) { return; }
