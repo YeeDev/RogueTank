@@ -3,6 +3,7 @@ using UnityEngine;
 using RTank.Movement;
 using RTank.Core;
 using RTank.Combat;
+using RTank.CoreData;
 
 namespace RTank.Controls
 {
@@ -10,6 +11,8 @@ namespace RTank.Controls
     [RequireComponent(typeof(Shooter))]
     public class Controller : MonoBehaviour
     {
+        [SerializeField] MapData mapData;
+
         Mover mover;
         Shooter shooter;
         TurnOrganizer turnOrganizer;
@@ -24,9 +27,19 @@ namespace RTank.Controls
 
         private void Update()
         {
-            ReadInput(Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"), mover.MoveAndRotate(CalculateAxis()));
+            ReadMoveInput();
             ReadInput(Input.GetMouseButtonDown(0), shooter.Shoot());
             ReadInput(Input.GetMouseButtonDown(1), shooter.Reload());
+        }
+
+        private void ReadMoveInput()
+        {
+            if (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"))
+            {
+                Vector3 axis = CalculateAxis();
+                if (mapData.IsTileOccupied(axis + transform.position)) { ReadInput(true, mover.Stuck()); }
+                else { ReadInput(true, mover.MoveAndRotate(axis)); }
+            }
         }
 
         private void ReadInput(bool condition, IEnumerator action)
