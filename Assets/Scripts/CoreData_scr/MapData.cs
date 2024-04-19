@@ -29,11 +29,13 @@ namespace RTank.CoreData
             return new Vector3(row, yPosition, column);
         }
 
-        public bool IsTileOccupied(Vector3 point)
+        public bool CanMoveToTile(Vector3 point)
         {
+            bool isOutOfBounds = point.x < 0 || point.x >= columns || point.z < 0 || point.z >= rows; 
+
             int tile = (int)Mathf.Pow(2, GetFlatArray((int)point.x, (int)point.z));
 
-            return (tile & obstaclePositions) != 0;
+            return (tile & obstaclePositions) != 0 || isOutOfBounds;
         }
     }
 }
