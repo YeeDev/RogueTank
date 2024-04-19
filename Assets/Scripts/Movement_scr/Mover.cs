@@ -9,6 +9,13 @@ namespace RTank.Movement
         [Range(1, 10)] [SerializeField] float speed;
         [Range(1, 10)] [SerializeField] float rotationSpeed;
 
+        public IEnumerator Stuck()
+        {
+            yield return new WaitForSeconds(1); //TODO animation time
+
+
+        }
+
         public IEnumerator MoveAndRotate(Vector3 addedPoint)
         {
             Vector3 movePoint = transform.position + addedPoint;
