@@ -17,6 +17,7 @@ namespace RTank.CoreData
         public float MidColumn => (columns - 1) * 0.5f;
 
         public void SetObstaclePositions(long l) => obstaclePositions = l;
+        public void UpdateMap(long l) => obstaclePositions |= l;  
 
         public int GetFlatArray(int x, int z) => x * columns + z;
 
@@ -26,6 +27,13 @@ namespace RTank.CoreData
             int column = index % columns;
 
             return new Vector3(row, yPosition, column);
+        }
+
+        public bool IsTileOccupied(Vector3 point)
+        {
+            int tile = (int)Mathf.Pow(2, GetFlatArray((int)point.x, (int)point.z));
+
+            return (tile & obstaclePositions) != 0;
         }
     }
 }
