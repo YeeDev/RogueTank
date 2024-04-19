@@ -15,9 +15,10 @@ namespace RTank.Movement
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.transform.CompareTag("Tank"))
+            if (collision.transform.CompareTag("Destructible"))
             {
-                Destroy(collision.transform.parent.gameObject);
+                GameObject toDestroy = collision.transform.parent != null ? collision.transform.parent.gameObject : collision.gameObject;
+                Destroy(toDestroy);
                 //TODO particles and other stuff
             }
             
