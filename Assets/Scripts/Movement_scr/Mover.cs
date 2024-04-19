@@ -9,22 +9,23 @@ namespace RTank.Movement
         [Range(1, 10)] [SerializeField] float speed;
         [Range(1, 10)] [SerializeField] float rotationSpeed;
 
-        public IEnumerator Stuck()
+        public IEnumerator Stuck(Vector3 axis)
         {
-            yield return new WaitForSeconds(1); //TODO animation time
-
-
+            yield return TryRotation(axis);
         }
 
-        public IEnumerator MoveAndRotate(Vector3 addedPoint)
+        public IEnumerator MoveAndRotate(Vector3 axis)
         {
-            Vector3 movePoint = transform.position + addedPoint;
-            Vector3 direction = movePoint - transform.position;
+            yield return TryRotation(axis);
+            yield return Move(axis, axis - transform.position);
+        }
+
+        public IEnumerator TryRotation(Vector3 axis)
+        {
+            Vector3 direction = axis - transform.position;
 
             float angle = MathY.CalculateFlatAngle(transform.forward, direction);
             if (angle > 1) { yield return Rotate(angle, direction); }
-
-            yield return Move(movePoint, direction);
         }
 
         private IEnumerator Rotate(float angle, Vector3 direction)
