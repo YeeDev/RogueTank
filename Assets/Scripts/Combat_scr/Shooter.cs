@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using RTank.CoreData;
+using RTank.Movement;
 
 namespace RTank.Combat
 {
@@ -7,6 +9,7 @@ namespace RTank.Combat
     {
         [SerializeField] Transform muzzle;
         [SerializeField] GameObject shellPrefab;
+        [SerializeField] MapData data;
 
         bool hasShell;
 
@@ -22,6 +25,7 @@ namespace RTank.Combat
 
             hasShell = false;
             GameObject shell = Instantiate(shellPrefab, muzzle.position, muzzle.rotation);
+            shell.GetComponent<Shell>().SetMapData = data;
 
             yield return new WaitUntil(() => shell == null);
         }
