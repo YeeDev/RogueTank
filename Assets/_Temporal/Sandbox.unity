@@ -1189,6 +1189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 177b6671a2e204841a2692a2fb95d582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapData: {fileID: 11400000, guid: 295e361817b01483c99f3fd925239a35, type: 2}
 --- !u!114 &2074069478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1216,7 +1217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   muzzle: {fileID: 1231944467}
-  shellPrefab: {fileID: 7179245104137668275, guid: 90cacc8eaac654348a71008899aaf1c9, type: 3}
+  shellPrefab: {fileID: 4774772924797548956, guid: 90cacc8eaac654348a71008899aaf1c9, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
