@@ -37,7 +37,7 @@ namespace RTank.Controls
             if (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"))
             {
                 Vector3 axis = CalculateAxis();
-                if (mapData.IsTileOccupied(axis + transform.position)) { ReadInput(true, mover.Stuck()); }
+                if (mapData.CanMoveToTile(axis + transform.position)) { ReadInput(true, mover.Stuck()); }
                 else { ReadInput(true, mover.MoveAndRotate(axis)); }
             }
         }
