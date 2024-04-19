@@ -25,6 +25,8 @@ namespace RTank.Controls
             turnOrganizer = GameObject.FindGameObjectWithTag("TurnOrganizer").GetComponent<TurnOrganizer>();
         }
 
+        private void Start() => shooter.SetMapData = mapData;
+
         private void Update()
         {
             ReadMoveInput();
