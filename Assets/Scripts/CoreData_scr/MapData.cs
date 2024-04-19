@@ -17,9 +17,9 @@ namespace RTank.CoreData
         public float MidColumn => (columns - 1) * 0.5f;
 
         public void SetObstaclePositions(long l) => obstaclePositions = l;
-        public void UpdateMap(long l) => obstaclePositions |= l;  
+        public void UpdateMap(long l) => obstaclePositions &= l;  
 
-        public int GetFlatArray(int x, int z) => x * columns + z;
+        public long GetTile(int x, int z) => (long)Mathf.Pow(2, x * columns + z);
 
         public Vector3 GetCoordinate(int index, float yPosition)
         {
@@ -33,7 +33,7 @@ namespace RTank.CoreData
         {
             bool isOutOfBounds = point.x < 0 || point.x >= columns || point.z < 0 || point.z >= rows; 
 
-            int tile = (int)Mathf.Pow(2, GetFlatArray((int)point.x, (int)point.z));
+            long tile = GetTile((int)point.x, (int)point.z);
 
             return (tile & obstaclePositions) != 0 || isOutOfBounds;
         }
