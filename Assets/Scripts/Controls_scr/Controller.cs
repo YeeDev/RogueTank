@@ -37,7 +37,7 @@ namespace RTank.Controls
             if (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"))
             {
                 Vector3 axis = CalculateAxis();
-                if (mapData.CanMoveToTile(axis + transform.position)) { ReadInput(true, mover.Stuck()); }
+                if (mapData.CanMoveToTile(axis)) { ReadInput(true, mover.Stuck(axis)); }
                 else { ReadInput(true, mover.MoveAndRotate(axis)); }
             }
         }
@@ -60,14 +60,14 @@ namespace RTank.Controls
             turnOrganizer.EndPlayerTurn();
         }
 
-        private static Vector3 CalculateAxis()
+        private Vector3 CalculateAxis()
         {
             bool pressedHorizontal = Input.GetButtonDown("Horizontal");
             float axis = pressedHorizontal ? Input.GetAxisRaw("Horizontal") : Input.GetAxisRaw("Vertical");
             Vector3 newPosition = pressedHorizontal ? Vector3.right : Vector3.forward;
             newPosition *= axis;
 
-            return newPosition;
+            return newPosition + transform.position;
         }
     }
 }
