@@ -8,12 +8,13 @@ namespace RTank.Combat
     public class Shooter : MonoBehaviour
     {
         [SerializeField] Transform muzzle;
-        [SerializeField] GameObject shellPrefab;
-        [SerializeField] MapData data;
+        [SerializeField] Shell shellPrefab;
 
         bool hasShell;
+        MapData mapData;
 
         public bool HasShell => hasShell;
+        public MapData SetMapData { set => mapData = value; }
 
         public IEnumerator Shoot()
         {
@@ -24,8 +25,8 @@ namespace RTank.Combat
             }
 
             hasShell = false;
-            GameObject shell = Instantiate(shellPrefab, muzzle.position, muzzle.rotation);
-            shell.GetComponent<Shell>().SetMapData = data;
+            Shell shell = Instantiate(shellPrefab, muzzle.position, muzzle.rotation);
+            shell.SetMapData = mapData;
 
             yield return new WaitUntil(() => shell == null);
         }
