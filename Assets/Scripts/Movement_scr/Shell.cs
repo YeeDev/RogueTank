@@ -1,4 +1,5 @@
 using UnityEngine;
+using RTank.CoreData;
 
 namespace RTank.Movement
 {
@@ -8,6 +9,9 @@ namespace RTank.Movement
         [SerializeField] float speed;
 
         Rigidbody rb;
+        MapData mapData;
+
+        public MapData SetMapData { set => mapData = value; }
 
         private void Awake() => rb = GetComponent<Rigidbody>();
 
@@ -17,12 +21,20 @@ namespace RTank.Movement
         {
             if (collision.transform.CompareTag("Destructible"))
             {
+                UpdateMap(collision);
+
                 GameObject toDestroy = collision.transform.parent != null ? collision.transform.parent.gameObject : collision.gameObject;
                 Destroy(toDestroy);
                 //TODO particles and other stuff
             }
-            
+
             Destroy(gameObject);
+        }
+
+        private void UpdateMap(Collision collision)
+        {
+            Vector3 collisionPos = collision.transform.position;
+            mapData.UpdateMap(~mapData.GetTile((int)collisionPos.x, (int)collisionPos.z));
         }
     }
 }
