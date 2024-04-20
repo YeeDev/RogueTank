@@ -34,7 +34,7 @@ namespace RTank.Movement
         private void UpdateMap(Collision collision)
         {
             Vector3 collisionPos = collision.transform.position;
-            mapData.UpdateMap(~mapData.GetTile((int)collisionPos.x, (int)collisionPos.z));
+            mapData.RemoveFromTile(~mapData.GetTile((int)collisionPos.x, (int)collisionPos.z));
         }
     }
 }

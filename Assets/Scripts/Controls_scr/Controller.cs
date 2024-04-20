@@ -40,7 +40,11 @@ namespace RTank.Controls
             {
                 Vector3 axis = CalculateAxis();
                 if (mapData.CanMoveToTile(axis)) { ReadInput(true, mover.Stuck(axis)); }
-                else { ReadInput(true, mover.MoveAndRotate(axis)); }
+                else
+                {
+                    ReadInput(true, mover.MoveAndRotate(axis));
+                    mapData.AddToTile(mapData.GetTile((int)axis.x, (int)axis.z));
+                }
             }
         }
 

@@ -17,7 +17,8 @@ namespace RTank.CoreData
         public float MidColumn => (columns - 1) * 0.5f;
 
         public void SetObstaclePositions(long l) => obstaclePositions = l;
-        public void UpdateMap(long l) => obstaclePositions &= l;  
+        public void RemoveFromTile(long l) => obstaclePositions &= l;
+        public void AddToTile(long l) => obstaclePositions |= l;
 
         public long GetTile(int x, int z) => (long)Mathf.Pow(2, x * columns + z);
 
