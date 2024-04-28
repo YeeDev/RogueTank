@@ -18,11 +18,13 @@ namespace RTank.Controls
         Shooter shooter;
         Transform player;
         TurnOrganizer turnOrganizer;
+        IMoveBehaviour moveBehaviour;
 
         private void Awake()
         {
             mover = GetComponent<Mover>();
             shooter = GetComponent<Shooter>();
+            moveBehaviour = GetComponent<IMoveBehaviour>();
 
             player = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -41,7 +43,7 @@ namespace RTank.Controls
         {
             if (!shooter.HasShell) { StartCoroutine(CallAction(shooter.Reload())); }
             else if (CheckIfPlayerInRange()) { StartCoroutine(CallAction(shooter.Shoot())); }
-            else { StartCoroutine(CallAction(mover.MoveAndRotate(Vector3.forward + transform.position))); }
+            else { StartCoroutine(CallAction(mover.MoveAndRotate(moveBehaviour.CalculateMovePoint()))); }
         }
 
         private IEnumerator CallAction(IEnumerator action)
