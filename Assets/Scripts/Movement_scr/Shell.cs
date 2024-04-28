@@ -23,7 +23,7 @@ namespace RTank.Movement
             {
                 UpdateMap(collision);
 
-                GameObject toDestroy = collision.transform.parent != null ? collision.transform.parent.gameObject : collision.gameObject;
+                GameObject toDestroy = collision.transform.root != null ? collision.transform.root.gameObject : collision.gameObject;
                 Destroy(toDestroy);
                 //TODO particles and other stuff
             }
