@@ -13,6 +13,7 @@ namespace RTank.Controls
     {
         [SerializeField] MapData mapData;
 
+        long previousPosition = 1;
         Mover mover;
         Shooter shooter;
         TurnOrganizer turnOrganizer;
@@ -29,6 +30,8 @@ namespace RTank.Controls
 
         private void Update()
         {
+            if (turnOrganizer.TurnRunning) { return; }
+
             ReadMoveInput();
             ReadInput(Input.GetMouseButtonDown(0), shooter.Shoot());
             ReadInput(Input.GetMouseButtonDown(1), shooter.Reload());
@@ -42,16 +45,16 @@ namespace RTank.Controls
                 if (mapData.CanMoveToTile(axis)) { ReadInput(true, mover.Stuck(axis)); }
                 else
                 {
+                    mapData.RemoveFromTile(~previousPosition);
                     ReadInput(true, mover.MoveAndRotate(axis));
-                    mapData.AddToTile(mapData.GetTile((int)axis.x, (int)axis.z));
+                    previousPosition = mapData.GetTile((int)axis.x, (int)axis.z);
+                    mapData.AddToTile(previousPosition);
                 }
             }
         }
 
         private void ReadInput(bool condition, IEnumerator action)
         {
-            if (turnOrganizer.TurnRunning) { return; }
-
             if (condition)
             {
                 turnOrganizer.RunTurn();
