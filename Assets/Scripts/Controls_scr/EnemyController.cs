@@ -41,7 +41,7 @@ namespace RTank.Controls
         {
             if (!shooter.HasShell) { StartCoroutine(CallAction(shooter.Reload())); }
             else if (CheckIfPlayerInRange()) { StartCoroutine(CallAction(shooter.Shoot())); }
-            else { StartCoroutine(CallAction(mover.MoveAndRotate(Vector3.forward))); }
+            else { StartCoroutine(CallAction(mover.MoveAndRotate(Vector3.forward + transform.position))); }
         }
 
         private IEnumerator CallAction(IEnumerator action)
@@ -59,10 +59,12 @@ namespace RTank.Controls
             return inRange && canShoot;
         }
 
+#if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, checkerRadius);
         }
+#endif
     }
 }
