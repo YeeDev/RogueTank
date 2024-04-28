@@ -26,7 +26,7 @@ namespace RTank.Core
                 for (int z = 0; z < mapData.Rows; z++)
                 {
                     int randomIndex = Random.Range(0, terrainPrefab.Length - 1);
-                    GameObject terrain = Instantiate(terrainPrefab[randomIndex], new Vector3(x, -1, z), Quaternion.identity, transform);
+                    GameObject terrain = Instantiate(terrainPrefab[randomIndex], new Vector3(x, 0, z), Quaternion.identity, transform);
                     terrain.transform.rotation = Quaternion.Euler(0, Random.Range(0, 4) * 90, 0);
                 }
             }

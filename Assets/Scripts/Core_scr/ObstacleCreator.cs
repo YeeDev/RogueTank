@@ -9,7 +9,6 @@ namespace RTank.Core
     {
         [SerializeField] int totalObstacles;
         [Range(1, 100)] [SerializeField] int chanceToSpawn;
-        [SerializeField] float yOffset = -0.2f; //TODO remove this with good modeling
         [SerializeField] GameObject obstaclePrefab;
         [SerializeField] MapData mapData;
 
@@ -28,7 +27,7 @@ namespace RTank.Core
                 {
                     obstaclesBits |= (long)Mathf.Pow(2, i);
                     obstaclesCreated--;
-                    Instantiate(obstaclePrefab, mapData.GetCoordinate(i, yOffset), Quaternion.identity);
+                    Instantiate(obstaclePrefab, mapData.GetCoordinate(i, 0), Quaternion.identity);
                 }
             }
 
