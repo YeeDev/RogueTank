@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using Yee.Math;
+using RTank.CoreData;
 using RTank.Core;
 using RTank.Movement;
 using RTank.Combat;
@@ -13,6 +14,7 @@ namespace RTank.Controls
     {
         [SerializeField] LayerMask playerLayer;
         [SerializeField] float checkerRadius;
+        [SerializeField] MapData mapData;
 
         Mover mover;
         Shooter shooter;
@@ -25,6 +27,8 @@ namespace RTank.Controls
             mover = GetComponent<Mover>();
             shooter = GetComponent<Shooter>();
             moveBehaviour = GetComponent<IMoveBehaviour>();
+
+            shooter.SetMapData = mapData;
 
             player = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -43,7 +47,7 @@ namespace RTank.Controls
         {
             if (!shooter.HasShell) { StartCoroutine(CallAction(shooter.Reload())); }
             else if (CheckIfPlayerInRange()) { StartCoroutine(CallAction(shooter.Shoot())); }
-            else { StartCoroutine(CallAction(mover.MoveAndRotate(moveBehaviour.CalculateMovePoint()))); }
+            else { StartCoroutine(CallAction(mover.MoveAndRotate(moveBehaviour.CalculateMovePoint(mapData)))); }
         }
 
         private IEnumerator CallAction(IEnumerator action)

@@ -1,11 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using RTank.CoreData;
 
 public class Patroller : MonoBehaviour, IMoveBehaviour
 {
-    public Vector3 CalculateMovePoint()
+    [SerializeField] bool verticalPatrol;
+
+    int axis = 1;
+    Vector3 moveDirection;
+
+    private void Awake() => moveDirection = verticalPatrol ? Vector3.forward : Vector3.right;
+
+    public Vector3 CalculateMovePoint(MapData mapData)
     {
-        throw new System.NotImplementedException();
+        Vector3 movePoint = transform.position;
+        
+        for (int i = 0; i < 2; i ++)
+        {
+            movePoint = transform.position + moveDirection * axis;
+
+            if (mapData.CanMoveToTile(movePoint))
+            {
+                if (i == 1) { return transform.position;  }
+
+                axis *= -1;
+            }
+        }
+
+        return movePoint;
     }
 }
