@@ -10,8 +10,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1284262285845269352, guid: 7fd94730e5b514b58bc8068c1089cc3b, type: 3}
       propertyPath: m_Name
-      value: Terrain
+      value: Terrain_3
       objectReference: {fileID: 0}
+    - target: {fileID: 1946730950891668287, guid: 7fd94730e5b514b58bc8068c1089cc3b, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 772878a98d13844e998eac8291d43cb9, type: 2}
     - target: {fileID: 4269810668032392296, guid: 7fd94730e5b514b58bc8068c1089cc3b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -52,7 +56,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3921893576049262948, guid: 7fd94730e5b514b58bc8068c1089cc3b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
