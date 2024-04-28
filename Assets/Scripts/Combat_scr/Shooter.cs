@@ -12,9 +12,12 @@ namespace RTank.Combat
 
         bool hasShell;
         MapData mapData;
+        Animator animator;
 
         public bool HasShell => hasShell;
         public MapData SetMapData { set => mapData = value; }
+
+        private void Awake() => animator = GetComponent<Animator>();
 
         public IEnumerator Shoot()
         {
@@ -35,7 +38,9 @@ namespace RTank.Combat
         {
             hasShell = true;
 
-            yield return new WaitForSeconds(1); //Change to animation and sound time
+            animator.SetTrigger("Reloading");
+
+            yield return new WaitForSeconds(0.8f);
         }
     }
 }
