@@ -1,8 +1,10 @@
 using UnityEngine;
+using System.Collections.Generic;
+using Random = UnityEngine.Random;
 
 namespace Yee.Math
 {
-    public class MathY : MonoBehaviour
+    public static class MathY
     {
         public static bool CheckEqualAxis(Vector3 v1, Vector3 v2)
         {
@@ -60,6 +62,19 @@ namespace Yee.Math
         {
             toFlat.z = t.z;
             return toFlat;
+        }
+
+        public static void Shuffle<T>(this IList<T> ts)
+        {
+            var count = ts.Count;
+            var last = count - 1;
+            for (var i = 0; i < last; ++i)
+            {
+                var r = Random.Range(i, count);
+                var tmp = ts[i];
+                ts[i] = ts[r];
+                ts[r] = tmp;
+            }
         }
     }
 }
