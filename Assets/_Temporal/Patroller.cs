@@ -1,31 +1,34 @@
 using UnityEngine;
 using RTank.CoreData;
 
-public class Patroller : MonoBehaviour, IMoveBehaviour
+namespace RTank.Movement.Data
 {
-    [SerializeField] bool verticalPatrol;
-
-    int axis = 1;
-    Vector3 moveDirection;
-
-    private void Awake() => moveDirection = verticalPatrol ? Vector3.forward : Vector3.right;
-
-    public Vector3 CalculateMovePoint(MapData mapData)
+    public class Patroller : MonoBehaviour, IMoveBehaviour
     {
-        Vector3 movePoint = transform.position;
-        
-        for (int i = 0; i < 2; i ++)
+        [SerializeField] bool verticalPatrol;
+
+        int axis = 1;
+        Vector3 moveDirection;
+
+        private void Awake() => moveDirection = verticalPatrol ? Vector3.forward : Vector3.right;
+
+        public Vector3 CalculateMovePoint(MapData mapData)
         {
-            movePoint = transform.position + moveDirection * axis;
+            Vector3 movePoint = transform.position;
 
-            if (mapData.CanMoveToTile(movePoint))
+            for (int i = 0; i < 2; i++)
             {
-                if (i == 1) { return transform.position;  }
+                movePoint = transform.position + moveDirection * axis;
 
-                axis *= -1;
+                if (mapData.CanMoveToTile(movePoint))
+                {
+                    if (i == 1) { return transform.position; }
+
+                    axis *= -1;
+                }
             }
-        }
 
-        return movePoint;
+            return movePoint;
+        }
     }
 }
