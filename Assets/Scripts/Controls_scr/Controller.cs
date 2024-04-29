@@ -24,6 +24,8 @@ namespace RTank.Controls
             shooter = GetComponent<Shooter>();
 
             turnOrganizer = GameObject.FindGameObjectWithTag("TurnOrganizer").GetComponent<TurnOrganizer>();
+
+            mapData.AddToTile(previousPosition);
         }
 
         private void Start() => shooter.SetMapData = mapData;
