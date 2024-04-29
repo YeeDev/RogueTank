@@ -5,6 +5,7 @@ using RTank.CoreData;
 using RTank.Core;
 using RTank.Movement;
 using RTank.Combat;
+using RTank.Movement.Data;
 
 namespace RTank.Controls
 {
@@ -16,6 +17,7 @@ namespace RTank.Controls
         [SerializeField] float checkerRadius;
         [SerializeField] MapData mapData;
 
+        long previousPoint;
         Mover mover;
         Shooter shooter;
         Transform player;
@@ -34,6 +36,8 @@ namespace RTank.Controls
 
             turnOrganizer = GameObject.FindGameObjectWithTag("TurnOrganizer").GetComponent<TurnOrganizer>();
             turnOrganizer.AddEnemy();
+
+            previousPoint = mapData.GetTile((int)transform.position.x, (int)transform.position.z);
         }
 
         private void OnEnable() => turnOrganizer.OnPlayerEnd += TakeTurn;
@@ -47,12 +51,24 @@ namespace RTank.Controls
         {
             if (!shooter.HasShell) { StartCoroutine(CallAction(shooter.Reload())); }
             else if (CheckIfPlayerInRange()) { StartCoroutine(CallAction(shooter.Shoot())); }
-            else { StartCoroutine(CallAction(mover.MoveAndRotate(moveBehaviour.CalculateMovePoint(mapData)))); }
+            else { StartCoroutine(Move()); }
         }
 
         private IEnumerator CallAction(IEnumerator action)
         {
             yield return action;
+
+            turnOrganizer.EndEnemyTurn();
+        }
+
+        private IEnumerator Move()
+        {
+            Vector3 movePoint = moveBehaviour.CalculateMovePoint(mapData);
+
+            mapData.RemoveFromTile(~previousPoint);
+            yield return mover.MoveAndRotate(movePoint);
+            previousPoint = mapData.GetTile((int)movePoint.x, (int)movePoint.z);
+            mapData.AddToTile(previousPoint);
 
             turnOrganizer.EndEnemyTurn();
         }
