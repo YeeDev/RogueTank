@@ -10,28 +10,22 @@ namespace RTank.Core
         [SerializeField] int totalObstacles;
         [Range(1, 100)] [SerializeField] int chanceToSpawn;
         [SerializeField] GameObject obstaclePrefab;
-        [SerializeField] MapData mapData;
 
-        private void Awake() => CreateObstacles();
-
-        private void CreateObstacles()
+        public void CreateObstacles(MapData mapData)
         {
-            long obstaclesBits = 0;
-            int obstaclesCreated = totalObstacles;
-
-            for (int i = 1; i < mapData.TotalTiles; i++)
+            mapData.ResetTile();
+            
+            while (totalObstacles > 0)
             {
-                if (obstaclesCreated <= 0) { break; }
+                int index = Random.Range(1, mapData.TotalTiles);
 
-                if (Random.Range(1, 100) <= chanceToSpawn)
-                {
-                    obstaclesBits |= (long)Mathf.Pow(2, i);
-                    obstaclesCreated--;
-                    Instantiate(obstaclePrefab, mapData.GetCoordinate(i, 0), Quaternion.identity);
-                }
+                if (mapData.TileIsOccupied(index)) { continue; }
+
+                Quaternion rotation = Quaternion.Euler(0, 90 * Random.Range(1, 4), 0);
+                Instantiate(obstaclePrefab, mapData.GetCoordinate(index, 0), rotation);
+                mapData.AddToTile((long)Mathf.Pow(2, index));
+                totalObstacles--;
             }
-
-            mapData.SetObstaclePositions(obstaclesBits);
         }
     }
 }
