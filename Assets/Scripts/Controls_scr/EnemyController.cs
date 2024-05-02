@@ -38,6 +38,7 @@ namespace RTank.Controls
             turnOrganizer.AddEnemy();
 
             previousPoint = mapData.GetTile((int)transform.position.x, (int)transform.position.z);
+            mapData.AddToTile(previousPoint);
         }
 
         private void OnEnable() => turnOrganizer.OnPlayerEnd += TakeTurn;
@@ -50,7 +51,11 @@ namespace RTank.Controls
         private void TakeTurn()
         {
             if (!shooter.HasShell) { StartCoroutine(CallAction(shooter.Reload())); }
-            else if (CheckIfPlayerInRange()) { StartCoroutine(CallAction(shooter.Shoot())); }
+            else if (CheckIfPlayerInRange())
+            {
+                if (CheckIfFacingPlayer()) { StartCoroutine(CallAction(mover.TryRotation(player.position))); }
+                else { StartCoroutine(CallAction(shooter.Shoot())); }
+            }
             else { StartCoroutine(Move()); }
         }
 
@@ -65,12 +70,24 @@ namespace RTank.Controls
         {
             Vector3 movePoint = moveBehaviour.CalculateMovePoint(mapData);
 
-            mapData.RemoveFromTile(~previousPoint);
-            yield return mover.MoveAndRotate(movePoint);
+            long temporalPreviousPoint = previousPoint;
             previousPoint = mapData.GetTile((int)movePoint.x, (int)movePoint.z);
             mapData.AddToTile(previousPoint);
 
+            yield return mover.MoveAndRotate(movePoint);
+
+            mapData.RemoveFromTile(~temporalPreviousPoint);
+
             turnOrganizer.EndEnemyTurn();
+        }
+
+        private bool CheckIfFacingPlayer()
+        {
+            Vector3 direction = (player.position - transform.position).normalized;
+
+            float angle = MathY.CalculateFlatAngle(transform.forward, direction);
+
+            return angle > 1;
         }
 
         private bool CheckIfPlayerInRange()
