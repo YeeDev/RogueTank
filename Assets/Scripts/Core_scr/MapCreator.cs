@@ -10,8 +10,16 @@ namespace RTank.Core
         [SerializeField] MapData mapData;
         [SerializeField] GameObject[] terrainPrefab;
         [SerializeField] BoxCollider wallPrefab;
+        [SerializeField] ObstacleCreator obstacleCreator;
+        [SerializeField] UnitPlacer unitPlacer;
 
-        private void Awake() => CreateMap();
+        private void Awake()
+        {
+            CreateMap();
+
+            obstacleCreator?.CreateObstacles(mapData);
+            unitPlacer?.AddUnits(mapData);
+        }
 
         private void CreateMap()
         {
