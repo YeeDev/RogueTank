@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53a0e90aff8e84ca28b51e5d94c46f8f, type: 3}
   m_Name: Sandbox_mapData
   m_EditorClassIdentifier: 
-  rows: 5
-  columns: 5
+  rows: 8
+  columns: 8
