@@ -16,7 +16,7 @@ namespace RTank.CoreData
         public float MidRow => (rows - 1) * 0.5f;
         public float MidColumn => (columns - 1) * 0.5f;
 
-        public void SetObstaclePositions(long l) => obstaclePositions = l;
+        public void ResetTile() => obstaclePositions = 1;
         public void RemoveFromTile(long l) => obstaclePositions &= l;
         public void AddToTile(long l) => obstaclePositions |= l;
 
@@ -37,6 +37,13 @@ namespace RTank.CoreData
             long tile = GetTile((int)point.x, (int)point.z);
 
             return (tile & obstaclePositions) != 0 || isOutOfBounds;
+        }
+
+        public bool TileIsOccupied(int point)
+        {
+            long pointInBit = (long)Mathf.Pow(2, point);
+
+            return (pointInBit & obstaclePositions) != 0;
         }
     }
 }
