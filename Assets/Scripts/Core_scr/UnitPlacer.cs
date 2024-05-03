@@ -26,7 +26,8 @@ namespace RTank.Core
             {
                 int index = Random.Range(1, mapData.TotalTiles);
 
-                if (mapData.TileIsOccupied(index)) { continue; }
+                Vector3 point = mapData.GetCoordinate(index, 0);
+                if (mapData.TileIsOccupied(index) || point.x <= 2 || point.z <= 2) { continue; }
 
                 Instantiate(unitToSpawn, mapData.GetCoordinate(index, 0), Quaternion.identity);
                 numberToSpawn--;
