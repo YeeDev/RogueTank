@@ -12,6 +12,7 @@ namespace RTank.Core
         [SerializeField] BoxCollider wallPrefab;
         [SerializeField] ObstacleCreator obstacleCreator;
         [SerializeField] UnitPlacer unitPlacer;
+        [SerializeField] MistCreator mistCreator;
 
         private void Awake()
         {
@@ -19,6 +20,7 @@ namespace RTank.Core
 
             obstacleCreator?.CreateObstacles(mapData);
             unitPlacer?.AddUnits(mapData);
+            mistCreator?.AddMist(mapData);
         }
 
         private void CreateMap()
