@@ -1,6 +1,7 @@
 using UnityEngine;
+using System.Collections.Generic;
 using RTank.CoreData;
-using Random = UnityEngine.Random;
+using Yee.Math;
 
 namespace RTank.Core
 {
@@ -23,17 +24,19 @@ namespace RTank.Core
 
         private void SpawnEnemies(int numberToSpawn, GameObject unitToSpawn, MapData mapData)
         {
-            while (numberToSpawn > 0)
+            List<int> freeSpaces = mapData.GetFreeTiles();
+
+            for (int i = 0; i < numberToSpawn; i++)
             {
-                int index = Random.Range(3, mapData.TotalTiles);
+                if(freeSpaces.Count <= 0) { break; }
 
-                Vector3 point = mapData.GetCoordinate(index, 0);
-                if (mapData.TileIsOccupied(index) || point.x <= 2 || point.z <= 2) { continue; }
+                freeSpaces.Shuffle();
+                int index = freeSpaces[0];
 
-                ITransferData transfer = Instantiate(unitToSpawn, mapData.GetCoordinate(index, 0), Quaternion.identity). GetComponent<ITransferData>();
+                ITransferData transfer = Instantiate(unitToSpawn, mapData.GetCoordinate(index, 0), Quaternion.identity).GetComponent<ITransferData>();
                 transfer.TransferMapData(mapData);
 
-                numberToSpawn--;
+                freeSpaces.RemoveAt(0);
             }
         }
     }

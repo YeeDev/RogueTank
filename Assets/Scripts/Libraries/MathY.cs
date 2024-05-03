@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
+using System;
 
 namespace Yee.Math
 {
@@ -75,6 +76,13 @@ namespace Yee.Math
                 ts[i] = ts[r];
                 ts[r] = tmp;
             }
+        }
+
+        public static string Reverse(string s)
+        {
+            char[] charArray = s.ToCharArray();
+            Array.Reverse(charArray);
+            return new string(charArray);
         }
     }
 }

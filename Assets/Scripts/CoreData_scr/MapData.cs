@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Yee.Math;
 
 namespace RTank.CoreData
 {
@@ -44,6 +47,23 @@ namespace RTank.CoreData
             long pointInBit = (long)Mathf.Pow(2, point);
 
             return (pointInBit & obstaclePositions) != 0;
+        }
+
+        public List<int> GetFreeTiles()
+        {
+            List<int> freeSpaces = new List<int>();
+
+            string invertedOccupiedSpaces = Convert.ToString(obstaclePositions, 2);
+            string occupiedSpaces = MathY.Reverse(invertedOccupiedSpaces);
+
+            for (int i = 0; i < TotalTiles; i++)
+            {
+                if (occupiedSpaces.Length > i) { if (occupiedSpaces[i] == '1') { continue; } }               
+
+                freeSpaces.Add(i);
+            }
+
+            return freeSpaces;
         }
     }
 }
