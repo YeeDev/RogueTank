@@ -49,7 +49,7 @@ namespace RTank.CoreData
             return (pointInBit & obstaclePositions) != 0;
         }
 
-        public List<int> GetFreeTiles()
+        public List<int> GetFreeTiles(bool removeInitialRange = false)
         {
             List<int> freeSpaces = new List<int>();
 
@@ -58,11 +58,17 @@ namespace RTank.CoreData
 
             for (int i = 0; i < TotalTiles; i++)
             {
-                if (occupiedSpaces.Length > i) { if (occupiedSpaces[i] == '1') { continue; } }               
+                if (occupiedSpaces.Length > i) { if (occupiedSpaces[i] == '1') { continue; } }
+
+                if (removeInitialRange)
+                {
+                    Vector3 point = GetCoordinate(i, 0);
+                    if (point.x < 3 && point.z < 3) { continue; }
+                }
 
                 freeSpaces.Add(i);
             }
-
+            
             return freeSpaces;
         }
     }

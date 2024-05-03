@@ -24,7 +24,7 @@ namespace RTank.Core
 
         private void SpawnEnemies(int numberToSpawn, GameObject unitToSpawn, MapData mapData)
         {
-            List<int> freeSpaces = mapData.GetFreeTiles();
+            List<int> freeSpaces = mapData.GetFreeTiles(true);
 
             for (int i = 0; i < numberToSpawn; i++)
             {
