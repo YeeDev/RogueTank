@@ -162,9 +162,9 @@ Light:
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_Bias: 0
+    m_NormalBias: 0
+    m_NearPlane: 0.1
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -189,7 +189,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 47
   m_RenderingLayerMask: 1
   m_Lightmapping: 1
   m_LightShadowCasterMode: 0
@@ -302,13 +302,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 1.5, y: 4, z: -2.5}
+  m_LocalRotation: {x: 0.46174863, y: 0, z: 0, w: 0.8870109}
+  m_LocalPosition: {x: 3.5, y: 6, z: -1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 55, y: 0, z: 0}
 --- !u!1 &1326583167
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,6 +365,7 @@ GameObject:
   - component: {fileID: 1454509469}
   - component: {fileID: 1454509470}
   - component: {fileID: 1454509471}
+  - component: {fileID: 1454509472}
   m_Layer: 0
   m_Name: Map Creator
   m_TagString: Untagged
@@ -408,6 +409,7 @@ MonoBehaviour:
   wallPrefab: {fileID: 4180854766228310674, guid: 65313d99579ae47dfaac90b0bdc92987, type: 3}
   obstacleCreator: {fileID: 1454509470}
   unitPlacer: {fileID: 1454509471}
+  mistCreator: {fileID: 1454509472}
 --- !u!114 &1454509470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,6 +442,19 @@ MonoBehaviour:
   numberOfRoamEnemies: 5
   roamEnemyPrefab: {fileID: 6884900279216275152, guid: 3c58bacc8822447fea80902d78f9187b, type: 3}
   playerPrefab: {fileID: 1500752303760805504, guid: 86c67d71f85894fc2bcdb76515dd917a, type: 3}
+--- !u!114 &1454509472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454509467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69de613cd35704feb82d0dc9bafbafb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mistPrefab: {fileID: 8721914199618858390, guid: 4b1a72568e5e743bea967bda3fa2f6a9, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
