@@ -304,7 +304,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
-  checkerRadius: 3.4
+  checkerRadius: 1.4
   mapData: {fileID: 11400000, guid: 295e361817b01483c99f3fd925239a35, type: 2}
 --- !u!114 &3524237243715994132
 MonoBehaviour:
