@@ -11,18 +11,20 @@ namespace RTank.Controls
 {
     [RequireComponent(typeof(Mover))]
     [RequireComponent(typeof(Shooter))]
-    public class EnemyController : MonoBehaviour
+    public class EnemyController : MonoBehaviour, ITransferData
     {
         [SerializeField] LayerMask playerLayer;
         [SerializeField] float checkerRadius;
-        [SerializeField] MapData mapData;
 
         long previousPoint;
         Mover mover;
         Shooter shooter;
+        MapData mapData;
         Transform player;
         TurnOrganizer turnOrganizer;
         IMoveBehaviour moveBehaviour;
+
+        public void TransferMapData(MapData mapData) => this.mapData = mapData;
 
         private void Awake()
         {
@@ -30,15 +32,19 @@ namespace RTank.Controls
             shooter = GetComponent<Shooter>();
             moveBehaviour = GetComponent<IMoveBehaviour>();
 
-            shooter.SetMapData = mapData;
-
             player = GameObject.FindGameObjectWithTag("Player").transform;
 
             turnOrganizer = GameObject.FindGameObjectWithTag("TurnOrganizer").GetComponent<TurnOrganizer>();
             turnOrganizer.AddEnemy();
+        }
+
+        private void Start()
+        {
+            shooter.SetMapData = mapData;
+
+            mapData.AddToTile(previousPoint);
 
             previousPoint = mapData.GetTile((int)transform.position.x, (int)transform.position.z);
-            mapData.AddToTile(previousPoint);
         }
 
         private void OnEnable() => turnOrganizer.OnPlayerEnd += TakeTurn;

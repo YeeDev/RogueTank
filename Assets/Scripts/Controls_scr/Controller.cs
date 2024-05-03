@@ -9,14 +9,15 @@ namespace RTank.Controls
 {
     [RequireComponent(typeof(Mover))]
     [RequireComponent(typeof(Shooter))]
-    public class Controller : MonoBehaviour
+    public class Controller : MonoBehaviour, ITransferData
     {
-        [SerializeField] MapData mapData;
-
         long previousPosition = 1;
         Mover mover;
         Shooter shooter;
+        MapData mapData;
         TurnOrganizer turnOrganizer;
+
+        public void TransferMapData(MapData mapData) => this.mapData = mapData;
 
         private void Awake()
         {
@@ -24,11 +25,13 @@ namespace RTank.Controls
             shooter = GetComponent<Shooter>();
 
             turnOrganizer = GameObject.FindGameObjectWithTag("TurnOrganizer").GetComponent<TurnOrganizer>();
-
-            mapData.AddToTile(previousPosition);
         }
 
-        private void Start() => shooter.SetMapData = mapData;
+        private void Start()
+        {
+            mapData.AddToTile(previousPosition);
+            shooter.SetMapData = mapData;
+        }
 
         private void Update()
         {

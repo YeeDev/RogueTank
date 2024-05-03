@@ -14,7 +14,8 @@ namespace RTank.Core
 
         public void AddUnits(MapData mapData)
         {
-            Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+            ITransferData transfer = Instantiate(playerPrefab, Vector3.zero,Quaternion.identity). GetComponent<ITransferData>();
+            transfer.TransferMapData(mapData);
 
             SpawnEnemies(numberOfPatrolEnemies, patrolEnemyPrefab, mapData);
             SpawnEnemies(numberOfRoamEnemies, roamEnemyPrefab, mapData);
@@ -24,12 +25,14 @@ namespace RTank.Core
         {
             while (numberToSpawn > 0)
             {
-                int index = Random.Range(1, mapData.TotalTiles);
+                int index = Random.Range(3, mapData.TotalTiles);
 
                 Vector3 point = mapData.GetCoordinate(index, 0);
                 if (mapData.TileIsOccupied(index) || point.x <= 2 || point.z <= 2) { continue; }
 
-                Instantiate(unitToSpawn, mapData.GetCoordinate(index, 0), Quaternion.identity);
+                ITransferData transfer = Instantiate(unitToSpawn, mapData.GetCoordinate(index, 0), Quaternion.identity). GetComponent<ITransferData>();
+                transfer.TransferMapData(mapData);
+
                 numberToSpawn--;
             }
         }
