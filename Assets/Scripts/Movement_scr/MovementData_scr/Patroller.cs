@@ -1,16 +1,15 @@
 using UnityEngine;
 using RTank.CoreData;
+using Random = UnityEngine.Random;
 
 namespace RTank.Movement.Data
 {
     public class Patroller : MonoBehaviour, IMoveBehaviour
     {
-        [SerializeField] bool verticalPatrol;
-
         int axis = 1;
         Vector3 moveDirection;
 
-        private void Awake() => moveDirection = verticalPatrol ? Vector3.forward : Vector3.right;
+        private void Awake() => moveDirection = Random.Range(1, 100) < 51 ? Vector3.forward : Vector3.right;
 
         public Vector3 CalculateMovePoint(MapData mapData)
         {
