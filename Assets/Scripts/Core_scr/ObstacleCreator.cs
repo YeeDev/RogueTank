@@ -8,7 +8,6 @@ namespace RTank.Core
     public class ObstacleCreator : MonoBehaviour
     {
         [SerializeField] int totalObstacles;
-        [Range(1, 100)] [SerializeField] int chanceToSpawn;
         [SerializeField] GameObject obstaclePrefab;
 
         public void CreateObstacles(MapData mapData)
