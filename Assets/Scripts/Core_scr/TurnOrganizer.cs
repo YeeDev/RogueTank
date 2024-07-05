@@ -5,7 +5,9 @@ namespace RTank.Core
 {
     public class TurnOrganizer : MonoBehaviour
     {
-        public Action OnPlayerEnd;
+        public event Action OnPlayerEnd;
+        public event Action OnEnemyEnd;
+        public event Action<bool> OnEndMatch;
 
         int totalEnemies;
         int waitingForEnemies;
@@ -23,12 +25,12 @@ namespace RTank.Core
 
         public void EndPlayerTurn()
         {
-            if (OnPlayerEnd != null) { OnPlayerEnd(); }
+            if (OnPlayerEnd != null && totalEnemies > 0) { OnPlayerEnd(); }
             else
             {
                 //TODO End level
                 turnRunning = false;
-                Debug.Log("Player wins");
+                OnEndMatch?.Invoke(true);
             }
         }
 
@@ -40,6 +42,9 @@ namespace RTank.Core
             {
                 turnRunning = false;
                 waitingForEnemies = totalEnemies;
+
+                if (GameObject.FindGameObjectWithTag("Player") == null) { OnEndMatch?.Invoke(false); }
+                else { OnEnemyEnd?.Invoke(); }
             }
         }
 
