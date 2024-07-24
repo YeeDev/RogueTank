@@ -50,10 +50,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapData: {fileID: 11400000, guid: 78685b98f20da450cb8a1a160be24fdd, type: 2}
   terrainPrefab:
-  - {fileID: 1284262285845269352, guid: 7fd94730e5b514b58bc8068c1089cc3b, type: 3}
-  - {fileID: 9165807651386132648, guid: 601c2b38b6e7047878fd07a3269c7787, type: 3}
-  - {fileID: 6055011190196519277, guid: e60bdae1002484b968b395caf665c74e, type: 3}
-  - {fileID: 7445628384883413481, guid: ac14eae3ec92745a8951ebd25258c605, type: 3}
+  - {fileID: 5617489794844101017, guid: 7ac7ad6ec011d452084750525ffa846e, type: 3}
+  - {fileID: 695070549284732084, guid: 7d872242fde474837b1f90982668f18a, type: 3}
+  - {fileID: 3865099639011753653, guid: 965834d085f75415a9939954845bf9bc, type: 3}
+  - {fileID: 4663597865190470597, guid: 9bb615a0229704b16943802b62682e29, type: 3}
   wallPrefab: {fileID: 4180854766228310674, guid: 65313d99579ae47dfaac90b0bdc92987, type: 3}
   obstacleCreator: {fileID: 3205416679135940796}
   unitPlacer: {fileID: 4981035316594572190}
