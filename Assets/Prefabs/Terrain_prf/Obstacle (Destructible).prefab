@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5485545769174246877}
   - component: {fileID: 6000319601882630005}
   - component: {fileID: 4754009652198608568}
-  - component: {fileID: 4213652273809879806}
+  - component: {fileID: 7119633254913443825}
   m_Layer: 0
   m_Name: Obstacle (Destructible)
   m_TagString: Destructible
@@ -41,7 +41,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5023074639667296129}
-  m_Mesh: {fileID: 4300000, guid: 7b454016c9ee44797b7330219fdfbe2b, type: 2}
+  m_Mesh: {fileID: 4300000, guid: 05a5e8c31255f460eb29ea3198a2c683, type: 2}
 --- !u!23 &4754009652198608568
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -62,8 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b608ebb26d4cd47b68e74ee790992f3e, type: 2}
-  - {fileID: 2100000, guid: 7afe6ad849e16441481b4a454f64d6a9, type: 2}
+  - {fileID: 2100000, guid: 9b060b8e5f6084fcf8be91ed29a87e6c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &4213652273809879806
-CapsuleCollider:
+--- !u!65 &7119633254913443825
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -103,8 +102,6 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  serializedVersion: 3
+  m_Size: {x: 0.8, y: 0.79999995, z: 0.79999995}
+  m_Center: {x: 0.000000029802322, y: 0.39999998, z: -0.000000044703484}
