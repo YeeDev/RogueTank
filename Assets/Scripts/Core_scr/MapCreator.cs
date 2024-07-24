@@ -13,6 +13,7 @@ namespace RTank.Core
         [SerializeField] ObstacleCreator obstacleCreator;
         [SerializeField] UnitPlacer unitPlacer;
         [SerializeField] MistCreator mistCreator;
+        [SerializeField] BuildingsCreator buildingsCreator;
 
         private void Awake()
         {
@@ -21,6 +22,7 @@ namespace RTank.Core
             obstacleCreator?.CreateObstacles(mapData);
             unitPlacer?.AddUnits(mapData);
             mistCreator?.AddMist(mapData);
+            buildingsCreator?.CreateBuildings(mapData);
         }
 
         private void CreateMap()
@@ -44,10 +46,10 @@ namespace RTank.Core
 
         private void CreateLimits()
         {
-            CreateWall(new Vector3(-1, 0, mapData.MidRow), new Vector3(1, 1, mapData.Rows + 2));
-            CreateWall(new Vector3(mapData.Columns, 0, mapData.MidRow), new Vector3(1, 1, mapData.Rows + 2));
-            CreateWall(new Vector3(mapData.MidColumn, 0, -1), new Vector3(mapData.Columns + 2, 1, 1));
-            CreateWall(new Vector3(mapData.MidColumn, 0, mapData.Rows), new Vector3(mapData.Columns + 2, 1, 1));
+            CreateWall(new Vector3(-1, 0, mapData.MidRow), new Vector3(1, 1, mapData.Rows + 2)); // Left
+            CreateWall(new Vector3(mapData.Columns, 0, mapData.MidRow), new Vector3(1, 1, mapData.Rows + 2)); // Right
+            CreateWall(new Vector3(mapData.MidColumn, 0, -1), new Vector3(mapData.Columns + 2, 1, 1)); // Botoom
+            CreateWall(new Vector3(mapData.MidColumn, 0, mapData.Rows), new Vector3(mapData.Columns + 2, 1, 1)); // Top
         }
 
         private void CreateWall(Vector3 position, Vector3 size)
