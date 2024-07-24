@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3205416679135940796}
   - component: {fileID: 4981035316594572190}
   - component: {fileID: 2353267722981117791}
+  - component: {fileID: 2959161041214982850}
   m_Layer: 0
   m_Name: Map Creator
   m_TagString: Untagged
@@ -47,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a4eec2ffbe864ee78d7f12737bfa7e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapData: {fileID: 11400000, guid: 295e361817b01483c99f3fd925239a35, type: 2}
+  mapData: {fileID: 11400000, guid: 78685b98f20da450cb8a1a160be24fdd, type: 2}
   terrainPrefab:
   - {fileID: 1284262285845269352, guid: 7fd94730e5b514b58bc8068c1089cc3b, type: 3}
   - {fileID: 9165807651386132648, guid: 601c2b38b6e7047878fd07a3269c7787, type: 3}
@@ -57,6 +58,7 @@ MonoBehaviour:
   obstacleCreator: {fileID: 3205416679135940796}
   unitPlacer: {fileID: 4981035316594572190}
   mistCreator: {fileID: 2353267722981117791}
+  buildingsCreator: {fileID: 2959161041214982850}
 --- !u!114 &3205416679135940796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,8 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71cec800f9628426ba211e8ea083cfe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalObstacles: 7
-  chanceToSpawn: 20
+  totalObstacles: 2
   obstaclePrefab: {fileID: 5023074639667296129, guid: c3f725af1ee4943cfb23b4c77c5907b7, type: 3}
 --- !u!114 &4981035316594572190
 MonoBehaviour:
@@ -84,9 +85,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee43f84e844cd489aa4823a7d8f87089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfPatrolEnemies: 2
+  numberOfPatrolEnemies: 1
   patrolEnemyPrefab: {fileID: 575578554695927363, guid: dc13b1a6efe7c4690bc125f00833e675, type: 3}
-  numberOfRoamEnemies: 5
+  numberOfRoamEnemies: 0
   roamEnemyPrefab: {fileID: 6884900279216275152, guid: 3c58bacc8822447fea80902d78f9187b, type: 3}
   playerPrefab: {fileID: 1500752303760805504, guid: 86c67d71f85894fc2bcdb76515dd917a, type: 3}
 --- !u!114 &2353267722981117791
@@ -102,3 +103,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mistPrefab: {fileID: 8721914199618858390, guid: 4b1a72568e5e743bea967bda3fa2f6a9, type: 3}
+--- !u!114 &2959161041214982850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8820446679781731188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71dbf1109b38f4b0d81048b6ce840514, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildings:
+  - {fileID: 1452144928384115134, guid: 976012d6632394b3698a5f0a31941443, type: 3}
+  - {fileID: 4655292144746607567, guid: 7996187d134d644b294775b9d3dd22ac, type: 3}
+  - {fileID: 9051811938226401575, guid: ecee796b9f8b34ae48afc38fd0762fce, type: 3}
+  - {fileID: 4859060284155087420, guid: b0f7573fb4c34465e930f115be9ca5ec, type: 3}
+  edgeRotations:
+  - {x: 0, y: 90, z: 0}
+  - {x: 0, y: 270, z: 0}
+  topRotations:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 180, z: 0}
