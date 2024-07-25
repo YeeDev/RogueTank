@@ -7,6 +7,7 @@ namespace RTank.Movement
     public class Shell : MonoBehaviour
     {
         [SerializeField] float speed;
+        [SerializeField] ParticleSystem dustParticles;
 
         Rigidbody rb;
         MapData mapData;
@@ -22,6 +23,10 @@ namespace RTank.Movement
             if (collision.transform.CompareTag("Destructible"))
             {
                 UpdateMap(collision);
+
+                dustParticles.transform.parent = null;
+                dustParticles.transform.position = collision.transform.position;
+                dustParticles.Play();
 
                 GameObject toDestroy = collision.transform.root != null ? collision.transform.root.gameObject : collision.gameObject;
                 Destroy(toDestroy);
