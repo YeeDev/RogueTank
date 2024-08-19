@@ -30,7 +30,6 @@ namespace RTank.Movement
 
                 GameObject toDestroy = collision.transform.root != null ? collision.transform.root.gameObject : collision.gameObject;
                 Destroy(toDestroy);
-                //TODO particles and other stuff
             }
 
             Destroy(gameObject);

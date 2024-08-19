@@ -9,10 +9,7 @@ namespace RTank.Movement
         [Range(1, 10)] [SerializeField] float speed;
         [Range(1, 10)] [SerializeField] float rotationSpeed;
 
-        public IEnumerator Stuck(Vector3 axis)
-        {
-            yield return TryRotation(axis);
-        }
+        public IEnumerator Stuck(Vector3 axis) { yield return TryRotation(axis); }
 
         public IEnumerator MoveAndRotate(Vector3 axis)
         {
