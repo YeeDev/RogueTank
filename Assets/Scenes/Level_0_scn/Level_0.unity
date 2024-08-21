@@ -378,6 +378,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: End Window
       objectReference: {fileID: 0}
+    - target: {fileID: 3425376097597753916, guid: 01f6da8a05a0741c9952147cb5e59306, type: 3}
+      propertyPath: waitEndTime
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6803504878364167530, guid: 01f6da8a05a0741c9952147cb5e59306, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
