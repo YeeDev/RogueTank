@@ -266,7 +266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2366467946493542698, guid: 571ae6ae339b64ecb9a1f5f4f8044b14, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 2366467946493542698, guid: 571ae6ae339b64ecb9a1f5f4f8044b14, type: 3}
       propertyPath: m_LocalPosition.y
@@ -274,7 +274,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2366467946493542698, guid: 571ae6ae339b64ecb9a1f5f4f8044b14, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 2366467946493542698, guid: 571ae6ae339b64ecb9a1f5f4f8044b14, type: 3}
       propertyPath: m_LocalRotation.w
@@ -333,6 +333,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3205416679135940796, guid: 8032c2242f62e405b9e2cbfb282bb372, type: 3}
+      propertyPath: totalObstacles
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593101966405818159, guid: 8032c2242f62e405b9e2cbfb282bb372, type: 3}
+      propertyPath: mapData
+      value: 
+      objectReference: {fileID: 11400000, guid: 7d413911f0928409b851fd1892dc7d1b, type: 2}
+    - target: {fileID: 4981035316594572190, guid: 8032c2242f62e405b9e2cbfb282bb372, type: 3}
+      propertyPath: numberOfRoamEnemies
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4981035316594572190, guid: 8032c2242f62e405b9e2cbfb282bb372, type: 3}
+      propertyPath: numberOfPatrolEnemies
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6087067691200741623, guid: 8032c2242f62e405b9e2cbfb282bb372, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -490,6 +506,18 @@ PrefabInstance:
     - target: {fileID: 4676084458653578750, guid: 222ce998fd9a4455bb6966415d522e2f, type: 3}
       propertyPath: m_Name
       value: Main UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5117367354036409420, guid: 222ce998fd9a4455bb6966415d522e2f, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5117367354036409420, guid: 222ce998fd9a4455bb6966415d522e2f, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 5117367354036409420, guid: 222ce998fd9a4455bb6966415d522e2f, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 576
       objectReference: {fileID: 0}
     - target: {fileID: 8519973403129027208, guid: 222ce998fd9a4455bb6966415d522e2f, type: 3}
       propertyPath: m_Pivot.x

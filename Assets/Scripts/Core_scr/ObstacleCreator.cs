@@ -25,8 +25,9 @@ namespace RTank.Core
                 int index = freeSpaces[0];
 
                 Quaternion rotation = Quaternion.Euler(0, 90 * Random.Range(1, 4), 0);
-                Instantiate(obstaclePrefab, mapData.GetCoordinate(index, 0), rotation);
-                mapData.AddToTile((long)Mathf.Pow(2, index));
+                Vector3 placePosition = mapData.GetCoordinate(index, 0);
+                Instantiate(obstaclePrefab, placePosition, rotation);
+                mapData.AddToTile(mapData.GetTile((int)placePosition.x, (int)placePosition.z));
 
                 freeSpaces.RemoveAt(0);
             }

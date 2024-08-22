@@ -30,7 +30,7 @@ namespace RTank.CoreData
             int row = index / columns;
             int column = index % columns;
 
-            return new Vector3(row, yPosition, column);
+            return new Vector3(column, yPosition, row);
         }
 
         public bool CanMoveToTile(Vector3 point)
