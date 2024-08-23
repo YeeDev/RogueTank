@@ -9,11 +9,13 @@ namespace RTank.Controls
 {
     [RequireComponent(typeof(Mover))]
     [RequireComponent(typeof(Shooter))]
+    [RequireComponent(typeof(Radar))]
     public class Controller : MonoBehaviour, ITransferData
     {
         long previousPosition = 1;
         Mover mover;
         Shooter shooter;
+        Radar radar;
         MapData mapData;
         TurnOrganizer turnOrganizer;
 
@@ -23,6 +25,7 @@ namespace RTank.Controls
         {
             mover = GetComponent<Mover>();
             shooter = GetComponent<Shooter>();
+            radar = GetComponent<Radar>();
 
             turnOrganizer = GameObject.FindGameObjectWithTag("TurnOrganizer").GetComponent<TurnOrganizer>();
         }
@@ -31,15 +34,18 @@ namespace RTank.Controls
         {
             mapData.AddToTile(previousPosition);
             shooter.SetMapData = mapData;
+
+            radar.SetInitialRadarLoads(mapData.RadarLoads);
         }
 
         private void Update()
         {
-            if (turnOrganizer.TurnRunning) { return; }
+            if (turnOrganizer.TurnRunning || turnOrganizer.MatchEnded) { return; }
 
             ReadMoveInput();
-            ReadInput(Input.GetMouseButtonDown(0), shooter.Shoot());
-            ReadInput(Input.GetMouseButtonDown(1), shooter.Reload());
+            ReadInput(Input.GetMouseButtonDown(0) && shooter.HasShell, shooter.Shoot());
+            ReadInput(Input.GetMouseButtonDown(1) && !shooter.HasShell, shooter.Reload());
+            ReadInput(Input.GetKeyDown(KeyCode.LeftShift) && radar.HasLoads, radar.Search());
         }
 
         private void ReadMoveInput()

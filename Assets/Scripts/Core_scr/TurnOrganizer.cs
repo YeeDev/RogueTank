@@ -14,6 +14,7 @@ namespace RTank.Core
         bool turnRunning;
 
         public bool TurnRunning => turnRunning;
+        public bool MatchEnded { get; private set; }
 
         public void RunTurn() => turnRunning = !turnRunning;
         public void AddEnemy() => totalEnemies++;
@@ -30,6 +31,7 @@ namespace RTank.Core
             {
                 //TODO End level
                 turnRunning = false;
+                MatchEnded = true;
                 OnEndMatch?.Invoke(true);
             }
         }

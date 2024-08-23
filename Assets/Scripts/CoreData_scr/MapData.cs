@@ -10,12 +10,14 @@ namespace RTank.CoreData
     {
         [SerializeField] int rows;
         [SerializeField] int columns;
+        [SerializeField] int radarLoads;
 
         long obstaclePositions;
 
         public int Rows => rows;
         public int Columns => columns;
         public int TotalTiles => rows * columns;
+        public int RadarLoads => radarLoads;
         public float MidRow => (rows - 1) * 0.5f;
         public float MidColumn => (columns - 1) * 0.5f;
 

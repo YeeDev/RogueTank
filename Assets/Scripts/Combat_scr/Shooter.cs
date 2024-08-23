@@ -2,11 +2,14 @@ using System.Collections;
 using UnityEngine;
 using RTank.CoreData;
 using RTank.Movement;
+using System;
 
 namespace RTank.Combat
 {
     public class Shooter : MonoBehaviour
     {
+        public Action<bool> OnUsingAmmo;
+
         [SerializeField] Transform muzzle;
         [SerializeField] Shell shellPrefab;
 
@@ -21,15 +24,10 @@ namespace RTank.Combat
 
         public IEnumerator Shoot()
         {
-            if (!hasShell)
-            {
-                Debug.Log("No shell, cannot shoot. Lost turn.");
-                yield break;
-            }
-
             hasShell = false;
             Shell shell = Instantiate(shellPrefab, muzzle.position, muzzle.rotation);
             shell.SetMapData = mapData;
+            OnUsingAmmo?.Invoke(hasShell);
 
             yield return new WaitUntil(() => shell == null);
         }
@@ -39,6 +37,7 @@ namespace RTank.Combat
             hasShell = true;
 
             animator.SetTrigger("Reloading");
+            OnUsingAmmo?.Invoke(hasShell);
 
             yield return new WaitForSeconds(0.8f);
         }
