@@ -33,8 +33,10 @@ namespace RTank.Core
                 freeSpaces.Shuffle();
                 int index = freeSpaces[0];
 
-                ITransferData transfer = Instantiate(unitToSpawn, mapData.GetCoordinate(index, 0), Quaternion.identity).GetComponent<ITransferData>();
+                Vector3 placePosition = mapData.GetCoordinate(index, 0);
+                ITransferData transfer = Instantiate(unitToSpawn, placePosition, Quaternion.identity).GetComponent<ITransferData>();
                 transfer.TransferMapData(mapData);
+                mapData.AddToTile(mapData.GetTile((int)placePosition.x, (int)placePosition.z));
 
                 freeSpaces.RemoveAt(0);
             }

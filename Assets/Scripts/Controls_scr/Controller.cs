@@ -12,9 +12,12 @@ namespace RTank.Controls
     [RequireComponent(typeof(Radar))]
     public class Controller : MonoBehaviour, ITransferData
     {
+        [SerializeField] AudioClip errorClip;
+
         long previousPosition = 1;
         Mover mover;
         Shooter shooter;
+        AudioSource audioSource;
         Radar radar;
         MapData mapData;
         TurnOrganizer turnOrganizer;
@@ -26,6 +29,7 @@ namespace RTank.Controls
             mover = GetComponent<Mover>();
             shooter = GetComponent<Shooter>();
             radar = GetComponent<Radar>();
+            audioSource = GetComponent<AudioSource>();
 
             turnOrganizer = GameObject.FindGameObjectWithTag("TurnOrganizer").GetComponent<TurnOrganizer>();
         }
@@ -43,9 +47,9 @@ namespace RTank.Controls
             if (turnOrganizer.TurnRunning || turnOrganizer.MatchEnded) { return; }
 
             ReadMoveInput();
-            ReadInput(Input.GetMouseButtonDown(0) && shooter.HasShell, shooter.Shoot());
-            ReadInput(Input.GetMouseButtonDown(1) && !shooter.HasShell, shooter.Reload());
-            ReadInput(Input.GetKeyDown(KeyCode.LeftShift) && radar.HasLoads, radar.Search());
+            ReadInput(Input.GetMouseButtonDown(0), shooter.HasShell, shooter.Shoot());
+            ReadInput(Input.GetMouseButtonDown(1), !shooter.HasShell, shooter.Reload());
+            ReadInput(Input.GetKeyDown(KeyCode.LeftShift), radar.HasLoads, radar.Search());
         }
 
         private void ReadMoveInput()
@@ -53,21 +57,24 @@ namespace RTank.Controls
             if (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"))
             {
                 Vector3 axis = CalculateAxis();
-                if (mapData.CanMoveToTile(axis)) { ReadInput(true, mover.Stuck(axis)); }
+                if (mapData.CanMoveToTile(axis)) { ReadInput(true, true, mover.Stuck(axis)); }
                 else
                 {
                     mapData.RemoveFromTile(~previousPosition);
-                    ReadInput(true, mover.MoveAndRotate(axis));
+                    ReadInput(true, true, mover.MoveAndRotate(axis));
                     previousPosition = mapData.GetTile((int)axis.x, (int)axis.z);
+
                     mapData.AddToTile(previousPosition);
                 }
             }
         }
 
-        private void ReadInput(bool condition, IEnumerator action)
+        private void ReadInput(bool inputCondition, bool gameCondition, IEnumerator action)
         {
-            if (condition)
+            if (inputCondition)
             {
+                if (!gameCondition) { audioSource.PlayOneShot(errorClip, 5); return; }
+
                 turnOrganizer.RunTurn();
                 StartCoroutine(CallAction(action));
             }

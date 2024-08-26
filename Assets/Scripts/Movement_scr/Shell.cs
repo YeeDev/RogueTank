@@ -11,10 +11,15 @@ namespace RTank.Movement
 
         Rigidbody rb;
         MapData mapData;
+        AudioSource audioSource;
 
         public MapData SetMapData { set => mapData = value; }
 
-        private void Awake() => rb = GetComponent<Rigidbody>();
+        private void Awake()
+        {
+            rb = GetComponent<Rigidbody>();
+            audioSource = dustParticles.GetComponent<AudioSource>();
+        }
 
         private void Start() => rb.velocity = transform.forward * speed * Time.fixedDeltaTime;
 
@@ -28,7 +33,13 @@ namespace RTank.Movement
                 dustParticles.transform.position = collision.transform.position;
                 dustParticles.Play();
 
+                if (collision.transform.root.CompareTag("Player"))
+                {
+                    collision.transform.root.GetComponentInChildren<AudioListener>().transform.parent = null;
+                }
+
                 GameObject toDestroy = collision.transform.root != null ? collision.transform.root.gameObject : collision.gameObject;
+                audioSource.Play();
                 Destroy(toDestroy);
             }
 

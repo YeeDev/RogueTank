@@ -10,14 +10,18 @@ namespace RTank.Combat
         public Action OnSearch;
 
         [SerializeField] float radarTime = 2f;
+        [SerializeField] AudioClip radarClip;
 
         int radarLoads;
         int currentRadarLoads;
+        AudioSource audioSource;
         List<ParticleSystem> enemiesRadar = new List<ParticleSystem>();
 
         public int GetInitialLoads => radarLoads;
         public int GetCurrentLoads => currentRadarLoads;
         public bool HasLoads => currentRadarLoads > 0;
+
+        private void Awake() => audioSource = GetComponent<AudioSource>();
 
         public void SetInitialRadarLoads(int loads)
         {
@@ -37,6 +41,7 @@ namespace RTank.Combat
                 }
 
                 currentRadarLoads--;
+                audioSource.PlayOneShot(radarClip, 4);
 
                 OnSearch?.Invoke();
             }

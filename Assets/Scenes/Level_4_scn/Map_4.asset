@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rows: 7
   columns: 7
-  radarLoads: 2
+  radarLoads: 3

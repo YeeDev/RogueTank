@@ -549,6 +549,10 @@ PrefabInstance:
       propertyPath: numberOfRoamEnemies
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4981035316594572190, guid: 8032c2242f62e405b9e2cbfb282bb372, type: 3}
+      propertyPath: numberOfPatrolEnemies
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6087067691200741623, guid: 8032c2242f62e405b9e2cbfb282bb372, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

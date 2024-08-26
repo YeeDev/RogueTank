@@ -13,7 +13,7 @@ namespace RTank.CoreData
         [SerializeField] int radarLoads;
 
         long obstaclePositions;
-
+        
         public int Rows => rows;
         public int Columns => columns;
         public int TotalTiles => rows * columns;
@@ -25,7 +25,7 @@ namespace RTank.CoreData
         public void RemoveFromTile(long l) => obstaclePositions &= l;
         public void AddToTile(long l) => obstaclePositions |= l;
 
-        public long GetTile(int x, int z) => (long)Mathf.Pow(2, x * columns + z);
+        public long GetTile(int x, int z) => (long)Mathf.Pow(2, z * columns + x);
 
         public Vector3 GetCoordinate(int index, float yPosition)
         {
@@ -58,7 +58,7 @@ namespace RTank.CoreData
             string invertedOccupiedSpaces = Convert.ToString(obstaclePositions, 2);
             string occupiedSpaces = MathY.Reverse(invertedOccupiedSpaces);
 
-            for (int i = 0; i < TotalTiles; i++)
+            for (int i = 1; i < TotalTiles; i++)
             {
                 if (occupiedSpaces.Length > i) { if (occupiedSpaces[i] == '1') { continue; } }
 
@@ -70,7 +70,7 @@ namespace RTank.CoreData
 
                 freeSpaces.Add(i);
             }
-            
+
             return freeSpaces;
         }
     }
