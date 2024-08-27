@@ -13,6 +13,8 @@ namespace RTank.Core
         [SerializeField] GameObject roamEnemyPrefab;
         [SerializeField] GameObject playerPrefab;
 
+        public int GetTotalEemies => numberOfPatrolEnemies + numberOfRoamEnemies;
+
         public void AddUnits(MapData mapData)
         {
             ITransferData transfer = Instantiate(playerPrefab, Vector3.zero,Quaternion.identity). GetComponent<ITransferData>();

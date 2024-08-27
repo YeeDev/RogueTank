@@ -110,6 +110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6803504878364167530}
   - component: {fileID: 3425376097597753916}
+  - component: {fileID: 2354566707791308480}
   m_Layer: 5
   m_Name: End Window
   m_TagString: Untagged
@@ -152,6 +153,19 @@ MonoBehaviour:
   waitEndTime: 1.5
   endPanel: {fileID: 446757469469416956}
   endText: {fileID: 6476579423910045552}
+  buttonText: {fileID: 3245052475253462247}
+--- !u!114 &2354566707791308480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020895103267162782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4217d2487ab0b44ff8807df012be603a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3034251703868966955
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,7 +286,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3535850704485211127}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2354566707791308480}
+        m_TargetAssemblyTypeName: RTank.Core.Loader, Assembly-CSharp
+        m_MethodName: LoadLevel
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6717514455810074621
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,7 +364,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Next Level
+  m_text: Main Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2dd59253f1228414d9a596bd7658f78e, type: 2}
   m_sharedMaterial: {fileID: -2490218528606367884, guid: 2dd59253f1228414d9a596bd7658f78e, type: 2}
@@ -661,7 +687,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3753072277242044936}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2354566707791308480}
+        m_TargetAssemblyTypeName: RTank.Core.Loader, Assembly-CSharp
+        m_MethodName: LoadLevel
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &9013795162283588175
 GameObject:
   m_ObjectHideFlags: 0

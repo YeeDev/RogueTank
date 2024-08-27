@@ -10,6 +10,7 @@ namespace RTank.UI
         [Range(0, 100)][SerializeField] float waitEndTime = 1;
         [SerializeField] GameObject endPanel;
         [SerializeField] TextMeshProUGUI endText;
+        [SerializeField] TextMeshProUGUI buttonText;
 
         TurnOrganizer turnOrganizer;
 
@@ -25,6 +26,7 @@ namespace RTank.UI
             yield return new WaitForSeconds(waitEndTime);
 
             endText.text = playerWon ? "You won!" : "You lost!";
+            buttonText.text = playerWon ? "Next Level" : "Restart";
             endPanel.SetActive(true);
         }
     }

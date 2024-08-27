@@ -75,7 +75,6 @@ namespace RTank.Controls
         private IEnumerator Move()
         {
             Vector3 movePoint = moveBehaviour.CalculateMovePoint(mapData);
-
             long temporalPreviousPoint = previousPoint;
             previousPoint = mapData.GetTile((int)movePoint.x, (int)movePoint.z);
             mapData.AddToTile(previousPoint);

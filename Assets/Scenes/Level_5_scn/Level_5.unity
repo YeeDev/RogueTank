@@ -351,10 +351,6 @@ PrefabInstance:
       propertyPath: mapData
       value: 
       objectReference: {fileID: 11400000, guid: d6ae30b5e889d44bc8ba66d55358aaa2, type: 2}
-    - target: {fileID: 4593101966405818159, guid: 8032c2242f62e405b9e2cbfb282bb372, type: 3}
-      propertyPath: mistCreator
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4981035316594572190, guid: 8032c2242f62e405b9e2cbfb282bb372, type: 3}
       propertyPath: numberOfRoamEnemies
       value: 3
@@ -407,8 +403,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Map Creator
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2353267722981117791, guid: 8032c2242f62e405b9e2cbfb282bb372, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
